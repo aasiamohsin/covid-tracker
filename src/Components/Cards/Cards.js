@@ -4,6 +4,7 @@ import { CountryContext } from '../../Context/CountriesContext/CountryContext';
 import { Chart } from '../Chart/Chart';
 import CountUp from 'react-countup';
 import globe from './globe.png';
+import spinner from './spinner.gif';
 
 export const Cards = () => {
   const { loading, countryData } = useContext(CountryContext);
@@ -25,7 +26,7 @@ export const Cards = () => {
     countryInfo,
   } = countryData;
 
-  if (loading) return loading;
+  if (loading) return <img src={spinner} alt='loading' style={{}}></img>;
 
   return (
     <div className='container'>

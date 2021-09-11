@@ -53,7 +53,7 @@ export const CountryState = ({ children }) => {
     );
     dispatch({
       type: Country_Chart_Data,
-      payload: res.data.timeline,
+      payload: res.data,
     });
   };
 

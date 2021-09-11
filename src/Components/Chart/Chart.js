@@ -4,7 +4,9 @@ import { CountryContext } from '../../Context/CountriesContext/CountryContext';
 import { GlobalContext } from '../../Context/GlobalContext/GlobalContext';
 
 export const Chart = () => {
-  const { countryChartData } = useContext(CountryContext);
+  const {
+    countryChartData: { timeline },
+  } = useContext(CountryContext);
   const { globalChartData, getGlobalChart } = useContext(GlobalContext);
 
   useEffect(() => {
@@ -12,15 +14,16 @@ export const Chart = () => {
     // eslint-disable-next-line
   }, []);
 
-  const { cases, recovered, deaths } = countryChartData;
+  const label = timeline && timeline.cases && Object.keys(timeline.cases);
 
-  const label = cases && Object.keys(cases);
+  const countryCase =
+    timeline && timeline.cases && Object.values(timeline.cases);
 
-  const countryCase = cases && Object.values(cases);
+  const countryRecovered =
+    timeline && timeline.recovered && Object.values(timeline.recovered);
 
-  const countryRecovered = recovered && Object.values(recovered);
-
-  const countryDeaths = deaths && Object.values(deaths);
+  const countryDeaths =
+    timeline && timeline.deaths && Object.values(timeline.deaths);
 
   const globalLabel =
     globalChartData.cases && Object.keys(globalChartData.cases);
@@ -33,7 +36,7 @@ export const Chart = () => {
 
   const globalDeaths =
     globalChartData.deaths && Object.values(globalChartData.deaths);
-  console.log(countryCase ? countryCase : globalCases);
+
   return (
     <div className='chart'>
       <Line
