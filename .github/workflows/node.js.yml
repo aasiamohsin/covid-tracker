@@ -5,35 +5,34 @@ name: Deploy to surge
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Installing Node
-      uses: actions/checkout@v2-beta
-      with:
-        node-version: 14
-        
-   # Runs a set of commands using the runners shell
-    - name: installing yarn
-      uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: install # will run `yarn install` command
-        
-    - name: build react app
-      run: yarn build
-     
-   # Steps to install Surge
-    - name: Install Surge
-      run: sudo npm install --global surge
-     
-     # Deploy app
-    - name: Deploy app to surge
-      run: surge ./build impoliteviral-covid.surge.sh --token ${{ secrets.Surge_Token}}
+      - uses: actions/checkout@v2
+      - name: Installing Node
+        uses: actions/checkout@v2-beta
+        with:
+          node-version: 14
+
+      # Runs a set of commands using the runners shell
+      - name: installing yarn
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install # will run `yarn install` command
+
+      - name: build react app
+        run: sudo yarn build
+
+      # Steps to install Surge
+      - name: Install Surge
+        run: sudo npm install --global surge
+
+        # Deploy app
+      - name: Deploy app to surge
+        run: surge ./build impoliteviral-covid.surge.sh --token ${{ secrets.Surge_Token}}
