@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import 'materialize-css/dist/css/materialize.min.css';
+import M from 'materialize-css/dist/js/materialize.min.js';
+import { GlobalState } from './Context/GlobalContext/GlobalState';
+import { CountryState } from './Context/CountriesContext/CountryState';
+import { NavBar } from './Components/NavBar/NavBar';
+import { CountryPicker } from './Components/CountryPicker/CountryPicker';
+import { Cards } from './Components/Cards/Cards';
 
 function App() {
+  useEffect(() => {
+    // Initialize Materializ Js
+    M.AutoInit();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GlobalState>
+      <CountryState>
+        <div className='App'>
+          <NavBar />
+          <CountryPicker />
+          <Cards />
+        </div>
+      </CountryState>
+    </GlobalState>
   );
 }
 
